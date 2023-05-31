@@ -6,97 +6,64 @@
   <body>
     <div class="mainwindow">
       
-      <el-aside width="20%">
+      <el-aside width="20%" class="aside">
         <el-scrollbar>
-          <el-menu :default-openeds="['1', '3']">
+          <el-menu :default-openeds="['1']">
+            <!-- 菜单栏1 -->
             <el-sub-menu index="1">
               <template #title>
-                <el-icon>
-                  <message />
-                </el-icon>Navigator One
+                <el-icon><message /></el-icon>用户请求
               </template>
               <el-menu-item-group>
-                <template #title>Group 1</template>
                 <el-menu-item index="1-1">Option 1</el-menu-item>
                 <el-menu-item index="1-2">Option 2</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="Group 2">
                 <el-menu-item index="1-3">Option 3</el-menu-item>
-              </el-menu-item-group>
-              <el-sub-menu index="1-4">
-                <template #title>Option4</template>
-                <el-menu-item index="1-4-1">Option 4-1</el-menu-item>
-              </el-sub-menu>
+              </el-menu-item-group>             
             </el-sub-menu>
+            <!-- 菜单栏2 -->
             <el-sub-menu index="2">
               <template #title>
-                <el-icon><icon-menu /></el-icon>Navigator Two
+                <el-icon><icon-menu /></el-icon>航班管理
               </template>
               <el-menu-item-group>
-                <template #title>Group 1</template>
                 <el-menu-item index="2-1">Option 1</el-menu-item>
                 <el-menu-item index="2-2">Option 2</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="Group 2">
                 <el-menu-item index="2-3">Option 3</el-menu-item>
               </el-menu-item-group>
-              <el-sub-menu index="2-4">
-                <template #title>Option 4</template>
-                <el-menu-item index="2-4-1">Option 4-1</el-menu-item>
-              </el-sub-menu>
             </el-sub-menu>
+            <!-- 菜单栏3 -->
             <el-sub-menu index="3">
               <template #title>
-                <el-icon>
-                  <setting />
-                </el-icon>Navigator Three
+                <el-icon><setting /></el-icon>订单管理
               </template>
               <el-menu-item-group>
-                <template #title>Group 1</template>
                 <el-menu-item index="3-1">Option 1</el-menu-item>
                 <el-menu-item index="3-2">Option 2</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="Group 2">
                 <el-menu-item index="3-3">Option 3</el-menu-item>
               </el-menu-item-group>
-              <el-sub-menu index="3-4">
-                <template #title>Option 4</template>
-                <el-menu-item index="3-4-1">Option 4-1</el-menu-item>
-              </el-sub-menu>
             </el-sub-menu>
           </el-menu>
         </el-scrollbar>
       </el-aside>
 
       <el-container>
-        <el-header style="text-align: right; font-size: 12px">
-          <div class="toolbar">
-            <el-dropdown>
-              <el-icon style="margin-right: 8px; margin-top: 1px">
-                <setting />
-              </el-icon>
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item>View</el-dropdown-item>
-                  <el-dropdown-item>Add</el-dropdown-item>
-                  <el-dropdown-item>Delete</el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
-            <span>Tom</span>
-          </div>
+        <!-- 顶部状态栏 -->
+        <el-header style="text-align: center; font-size: 28px;padding: 8px; margin-top: 5px;font-weight: bold;">
+          ⚙️机票预定后台管理系统⚙️
         </el-header>
-
+        <!-- 主体内容 -->
         <el-main>
-          <el-scrollbar>
-            <el-table :data="tableData">
-              <el-table-column prop="date" label="Date" width="140" />
-              <el-table-column prop="name" label="Name" width="120" />
-              <el-table-column prop="address" label="Address" />
+          <el-scrollbar style="overflow: hidden;"> 
+            <el-table :data="tableData" height="100%">
+              <el-table-column prop="_Request_time" label="Request time" width="200" />
+              <el-table-column prop="_Request_user" label="Request user" width="140" />
+              <el-table-column prop="_Request_detail" label="Request_detail" width="400"/>
+              <el-table-column prop="_Request_status" label="Request status" width="130"/>
             </el-table>
           </el-scrollbar>
         </el-main>
       </el-container>
+
 
     </div>
   </body>
@@ -108,9 +75,10 @@ import { ref } from 'vue'
 import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
 
 const item = {
-  date: '2016-05-02',
-  name: 'Tom',
-  address: 'No. 189, Grove St, Los Angeles',
+  _Request_time: '31/05/2023 12:00:00',
+  _Request_user: 'Tom',
+  _Request_detail: 'I want to book a ticket from Beijing to Shanghai.',
+  _Request_status: '已完成'
 }
 const tableData = ref(Array.from({ length: 20 }).fill(item))
 
@@ -149,57 +117,46 @@ body {
   text-align: center;
 }
 
-.mainwindow .el-header {
-  position: relative;
-  background: transparent;
-  color: var(--el-text-color-primary);
-  border-radius: 30px;
-}
-
-.mainwindow .el-aside {
+.aside {
   color: var(--el-text-color-primary);
   background: transparent;
   border-right: none;
   border-radius: 30px;
-  /* border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px; */
 }
 
 .el-menu {
   border-right: none;
-  background: transparent;
-  border-bottom-left-radius: 30px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 15px;
 }
 
-.mainwindow .el-sub-menu{
-  background: transparent;
-}
 
-.el-menu-item {
-  background: transparent;
-}
-
-.mainwindow .el-table {
-  background: transparent;
-}
-
-.mainwindow .el-main {
-  padding: 0;
+.el-main {
+  padding: 0 0 0 5px;
   background: transparent;
   border-bottom-right-radius: 30px;
 }
 
-.mainwindow .toolbar {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  right: 20px;
+.el-scrollbar {
   background: transparent;
+  overflow: hidden;
 }
 
-.el-dropdown-item{
-  background:transparent;
+.el-table {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  height: 100%;
 }
+
+/* ::v-deep{
+  .el-table__header-wrapper {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  .el-table__body-wrapper {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+} */
 
 </style>
