@@ -5,20 +5,22 @@
 
   <body>
     <div class="mainwindow">
-      
+
       <el-aside width="20%" class="aside">
         <el-scrollbar>
           <el-menu :default-openeds="['1']">
             <!-- 菜单栏1 -->
             <el-sub-menu index="1">
               <template #title>
-                <el-icon><message /></el-icon>用户请求
+                <el-icon>
+                  <message />
+                </el-icon>用户请求
               </template>
               <el-menu-item-group>
                 <el-menu-item index="1-1">Option 1</el-menu-item>
                 <el-menu-item index="1-2">Option 2</el-menu-item>
                 <el-menu-item index="1-3">Option 3</el-menu-item>
-              </el-menu-item-group>             
+              </el-menu-item-group>
             </el-sub-menu>
             <!-- 菜单栏2 -->
             <el-sub-menu index="2">
@@ -34,7 +36,9 @@
             <!-- 菜单栏3 -->
             <el-sub-menu index="3">
               <template #title>
-                <el-icon><setting /></el-icon>订单管理
+                <el-icon>
+                  <setting />
+                </el-icon>订单管理
               </template>
               <el-menu-item-group>
                 <el-menu-item index="3-1">Option 1</el-menu-item>
@@ -53,14 +57,16 @@
         </el-header>
         <!-- 主体内容 -->
         <el-main>
-          <el-scrollbar style="overflow: hidden;"> 
-            <el-table :data="tableData" height="100%">
-              <el-table-column prop="_Request_time" label="Request time" width="200" />
-              <el-table-column prop="_Request_user" label="Request user" width="140" />
-              <el-table-column prop="_Request_detail" label="Request_detail" width="400"/>
-              <el-table-column prop="_Request_status" label="Request status" width="130"/>
-            </el-table>
-          </el-scrollbar>
+          <!-- <el-scrollbar> -->
+            <!-- <template> -->
+              <el-table :data="tableData" align="center">
+                <el-table-column prop="_Request_time" label="请求发起时间" width="200" />
+                <el-table-column prop="_Request_user" label="请求用户" width="160" />
+                <el-table-column prop="_Request_detail" label="请求内容"/>
+                <el-table-column prop="_Request_status" label="状态" width="130" />
+              </el-table>
+            <!-- </template> -->
+          <!-- </el-scrollbar> -->
         </el-main>
       </el-container>
 
@@ -74,13 +80,78 @@
 import { ref } from 'vue'
 import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
 
-const item = {
-  _Request_time: '31/05/2023 12:00:00',
-  _Request_user: 'Tom',
-  _Request_detail: 'I want to book a ticket from Beijing to Shanghai.',
-  _Request_status: '已完成'
+interface Requests {
+  _Request_time: string
+  _Request_user: string
+  _Request_detail: string
+  _Request_status: string
 }
-const tableData = ref(Array.from({ length: 20 }).fill(item))
+
+const tableRowClassName = ({
+  row,
+  rowIndex,
+}: {
+  row: Requests
+  rowIndex: number
+}) => {
+  if (rowIndex === 1) {
+    return 'warning-row'
+  } else if (rowIndex === 3) {
+    return 'success-row'
+  }
+  return ''
+}
+
+const tableData: Requests[] = [
+  {
+    _Request_time: '31/05/2023 12:00:00',
+    _Request_user: 'Tom',
+    _Request_detail: 'I want to book a ticket from Beijing to Shanghai.',
+    _Request_status: '已完成'
+  },
+  {
+    _Request_time: '31/05/2023 12:00:00',
+    _Request_user: 'Steve',
+    _Request_detail: 'I want to book a ticket from Beijing to Shanghai.',
+    _Request_status: '待处理'
+  },
+  {
+    _Request_time: '31/05/2023 12:00:00',
+    _Request_user: 'Smith',
+    _Request_detail: 'I want to book a ticket from Beijing to Shanghai.',
+    _Request_status: '已完成'
+  },
+  {
+    _Request_time: '31/05/2023 12:00:00',
+    _Request_user: 'John',
+    _Request_detail: 'I want to book a ticket from Beijing to Shanghai.',
+    _Request_status: '已完成'
+  },
+  {
+    _Request_time: '31/05/2023 12:00:00',
+    _Request_user: 'Tom',
+    _Request_detail: 'I want to book a ticket from Beijing to Shanghai.',
+    _Request_status: '已完成'
+  },
+  {
+    _Request_time: '31/05/2023 12:00:00',
+    _Request_user: 'Steve',
+    _Request_detail: 'I want to book a ticket from Beijing to Shanghai.',
+    _Request_status: '待处理'
+  },
+  {
+    _Request_time: '31/05/2023 12:00:00',
+    _Request_user: 'Smith',
+    _Request_detail: 'I want to book a ticket from Beijing to Shanghai.',
+    _Request_status: '已完成'
+  },
+  {
+    _Request_time: '31/05/2023 12:00:00',
+    _Request_user: 'John',
+    _Request_detail: 'I want to book a ticket from Beijing to Shanghai.',
+    _Request_status: '已完成'
+  },
+]
 
 </script>
 
@@ -121,42 +192,41 @@ body {
   color: var(--el-text-color-primary);
   background: transparent;
   border-right: none;
-  border-radius: 30px;
+  border-radius: 20px;
+  margin: 10px 0 5px 5px;
 }
 
 .el-menu {
   border-right: none;
   background: rgba(255, 255, 255, 0.4);
-  border-radius: 15px;
+  border-radius: 20px;
 }
 
+.el-menu .el-menu-item{
+  background: rgba(255, 255, 255, 0);
+}
 
 .el-main {
-  padding: 0 0 0 5px;
+  padding: 0 5px 10px 5px;
   background: transparent;
-  border-bottom-right-radius: 30px;
 }
 
-.el-scrollbar {
+/* .el-scrollbar {
   background: transparent;
   overflow: hidden;
-}
+} */
 
 .el-table {
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
+  border-radius:15px;
   height: 100%;
+  background: rgba(255, 255, 255, 0.4);
 }
 
-/* ::v-deep{
-  .el-table__header-wrapper {
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-  }
-  .el-table__body-wrapper {
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-  }
-} */
+.el-table .warning-row {
+  --el-table-tr-bg-color: var(--el-color-warning-light-9);
+}
+.el-table .success-row {
+  --el-table-tr-bg-color: var(--el-color-success-light-9);
+}
 
 </style>
