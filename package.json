@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@vee-validate/rules": "^4.5.8",
+    "axios": "^1.4.0",
+    "npm": "^9.6.7"
+  }
+}

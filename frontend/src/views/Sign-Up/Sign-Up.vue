@@ -5,13 +5,13 @@
     <body>
        <form>
           <h1>Sign Up</h1>
-          <input type="text" placeholder="用户名" required=true />
-          <input type="text" placeholder="姓名" required=true />
-          <input type="text" placeholder="身份证号" required=true />
-          <input type="text" placeholder="电话号码" required=true />
-          <input type="text" placeholder="邮箱" required=true />
-          <input type="password" placeholder="密码" required=true />
-          <input type="password" placeholder="确认密码" required=true />
+          <input type="text" placeholder="用户名" required=true v-model="RegisterParams.username"/>
+          <input type="text" placeholder="姓名" required=true v-model="RegisterParams.name"/>
+          <input type="text" placeholder="身份证号" required=true v-model="RegisterParams.ID"/>
+          <input type="text" placeholder="电话号码" required=true v-model="RegisterParams.phone"/>
+          <input type="text" placeholder="邮箱" required=true v-model="RegisterParams.email"/>
+          <input type="password" placeholder="密码" required=true show-password:true v-model="RegisterParams.password"/>
+          <input type="password" placeholder="确认密码" required=true show-password:true v-model="RegisterParams.password"/>
           <button type="submit">&gt;&gt;&gt;注册&lt;&lt;&lt;</button>
           <h2>已有账号？点此处<router-link to="/login">登录</router-link></h2>
        </form>
@@ -19,6 +19,17 @@
  </template>
  
  <script setup lang='ts'>
+ import type { RegisterReq } from '@/interface/register';
+ import { reactive } from 'vue';
+
+const RegisterParams : RegisterReq = reactive({
+   username: '',
+   name: '',
+   ID: '',
+   phone: '',
+   email: '',
+   password: '',
+});
  </script>
  
  <style scoped>
