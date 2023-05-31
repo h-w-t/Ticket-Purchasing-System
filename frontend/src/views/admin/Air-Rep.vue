@@ -17,9 +17,9 @@
                 </el-icon>用户请求
               </template>
               <el-menu-item-group>
-                <el-menu-item index="1-1">Option 1</el-menu-item>
-                <el-menu-item index="1-2">Option 2</el-menu-item>
-                <el-menu-item index="1-3">Option 3</el-menu-item>
+                <el-menu-item index="1-1">改签</el-menu-item>
+                <el-menu-item index="1-2">退票</el-menu-item>
+                <el-menu-item index="1-3">问讯</el-menu-item>
               </el-menu-item-group>
             </el-sub-menu>
             <!-- 菜单栏2 -->
@@ -28,9 +28,9 @@
                 <el-icon><icon-menu /></el-icon>航班管理
               </template>
               <el-menu-item-group>
-                <el-menu-item index="2-1">Option 1</el-menu-item>
-                <el-menu-item index="2-2">Option 2</el-menu-item>
-                <el-menu-item index="2-3">Option 3</el-menu-item>
+                <el-menu-item index="2-1">添加航班</el-menu-item>
+                <el-menu-item index="2-2">修改航班</el-menu-item>
+                <el-menu-item index="2-3">删除航班</el-menu-item>
               </el-menu-item-group>
             </el-sub-menu>
             <!-- 菜单栏3 -->
@@ -41,9 +41,9 @@
                 </el-icon>订单管理
               </template>
               <el-menu-item-group>
-                <el-menu-item index="3-1">Option 1</el-menu-item>
-                <el-menu-item index="3-2">Option 2</el-menu-item>
-                <el-menu-item index="3-3">Option 3</el-menu-item>
+                <el-menu-item index="3-1">所有订单</el-menu-item>
+                <el-menu-item index="3-2">机票退票</el-menu-item>
+                <el-menu-item index="3-3">机票改签</el-menu-item>
               </el-menu-item-group>
             </el-sub-menu>
           </el-menu>

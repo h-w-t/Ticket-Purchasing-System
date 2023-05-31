@@ -22,6 +22,11 @@ const router = createRouter({
       path: '/air-rep',
       name: 'air-rep',
       component: () => import('../views/admin/Air-Rep.vue')
+    },
+    {
+      path:'/purchase',
+      name:'purchase',
+      component: () => import('../views/Customer/Purchase.vue')
     }
   ]
 })
