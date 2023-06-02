@@ -4,18 +4,21 @@
    </head>
 
    <body>
-      <form @submit.prevent="handleSubmit">
+      <!-- <form @submit.prevent="handleSubmit"> -->
+      <form>
          <h1>Login</h1>
          <input type="text" placeholder="用户名" required=true  v-model="LoginParams.username"/>
          <input type="password" placeholder="密码" required=true  show-password:true v-model="LoginParams.password"/>
-         <button type="submit">&gt;&gt;&gt;登录&lt;&lt;&lt;</button>
+         <button type="submit" @click="onSubmit">&gt;&gt;&gt;登录&lt;&lt;&lt;</button>
       </form>
    </body>
 </template>
 
 <script setup lang='ts'>
-import type { LoginReq } from '@/interface/user';
+import type { LoginReq } from '@/api';
+import {login} from '@/api';
 import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
 import { useField, useForm } from 'vee-validate';
 import { required } from '@vee-validate/rules';
 import axios from 'axios';
@@ -25,26 +28,48 @@ const LoginParams : LoginReq = reactive({
    password: '',
 });
 
-const { handleSubmit } = useForm();
+//表单验证
+// const { handleSubmit } = useForm();
 
-const { value: username, errorMessage: usernameError } = useField('username', required);
-const { value: password, errorMessage: passwordError } = useField('password', required);
+// const { value: username, errorMessage: usernameError } = useField('LoginParams.username', required);
+// const { value: password, errorMessage: passwordError } = useField('LoginParams.password', required);
 
-const errors = {
-  username: usernameError,
-  password: passwordError,
-};
+// const errors = {
+//   username: usernameError,
+//   password: passwordError,
+// };
 
-const onSubmit = handleSubmit(async () => {
-  try {
-    const response = await axios.post('/api/login', LoginParams);
-    console.log(response.data);
-    // 处理响应数据
-  } catch (error) {
-    console.error(error);
-    // 处理错误
-  }
-});
+// 跳转无法实现
+function onSubmit(this: { $router: any, error: any, $message: any }) {
+   // console.log('LoginParams:', LoginParams);
+   // login(LoginParams)
+   //    .then(res => {
+   //       console.log('Response: ', res.data);
+   //       if (LoginParams.username.startsWith('arp-')) {
+   //          this.$router.push('/air-rep');
+   //       } else if (LoginParams.username.startsWith('cst-')) {
+   //          this.$router.push('/purchase');
+   //       }
+   //    })
+   //    .catch(err => {
+   //       this.error = err.response.data.message;
+   //       this.$message.error(this.error);
+   //    });
+   if (LoginParams.username.startsWith('arp-')) {
+            this.$router.push('/air-rep');
+         } else if (LoginParams.username.startsWith('cst-')) {
+            this.$router.push('/purchase');
+         }
+}
+
+// }
+function getTargetRoute(username: string) {
+   if (username.startsWith('arp-')) {
+      return "/air-rep";
+   } else if (username.startsWith('cst-')) {
+      return "/purchase";
+   }
+}
 
 </script>
 
